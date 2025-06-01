@@ -54,45 +54,10 @@ public class JogoDoMilhao {
 
                 switch (teste) {
 
-                    case 1:
+                    case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10: 
                     gaming = resultPergunta(teste, resposta, vPos);
                     break;
                     
-                    case 2:
-                    gaming = resultPergunta(teste, resposta, vPos);
-                    break;
-                    
-                    case 3:
-                    gaming = resultPergunta(teste, resposta, vPos);
-                    break;
-
-                    case 4:
-                    gaming = resultPergunta(teste, resposta, vPos);
-                    break;
-
-                    case 5:
-                    gaming = resultPergunta(teste, resposta, vPos);
-                    break;
-
-                    case 6:
-                    gaming = resultPergunta(teste, resposta, vPos);
-                    break;
-
-                    case 7:
-                    gaming = resultPergunta(teste, resposta, vPos);
-                    break;
-
-                    case 8:
-                    gaming = resultPergunta(teste, resposta, vPos);
-                    break;
-
-                    case 9:
-                    gaming = resultPergunta(teste, resposta, vPos);
-                    break;
-
-                    case 10:
-                    gaming = resultPergunta(teste, resposta, vPos);
-                    break;
             }
 
         }
