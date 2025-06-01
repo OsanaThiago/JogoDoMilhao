@@ -14,8 +14,9 @@ public class JogoDoMilhao {
     //Declaração de métodos/Variaveis 
 
     public static void start(){
-        System.out.println("SEJA MUITO BEM VINDO AO JOGO DO MILHÃO!!");   
-        System.out.println("PREPARADO VOLTAR PARA CASA MILIONÁRIO?\n\n1 = INICIAR \n2 = SAIR");
+        System.out.println("\nSEJA MUITO BEM VINDO AO JOGO DO MILHÃO!!");   
+        System.out.println("PREPARADO VOLTAR PARA CASA MILIONÁRIO?\n\n1 = Iniciar \n2 = Sair\n");
+        System.out.print("Resposta: ");
         int play = sc2.nextInt();
 
         if(play == 1){
@@ -32,10 +33,11 @@ public class JogoDoMilhao {
         int [] numero = new int[10];
         int teste;
         int posicao = -1;
+        boolean gaming = true;
 
-        for(int i = 0; i<10; i++){
-            teste = rd.nextInt(1,2);
-            teste -=1;
+            while(numero[9] == 0 && gaming){
+
+            teste = rd.nextInt(1,11);
             boolean contem = false;
 
             for(int j = 0; j<numero.length;j++){
@@ -52,78 +54,76 @@ public class JogoDoMilhao {
 
                 switch (teste) {
 
-                    case 0:
-                    resultPergunta(teste, resposta, vPos);
-                    break;
-                    
                     case 1:
-                    resultPergunta(teste, resposta, vPos);
+                    gaming = resultPergunta(teste, resposta, vPos, gaming);
                     break;
                     
                     case 2:
-                    resultPergunta(teste, resposta, vPos);
+                    gaming = resultPergunta(teste, resposta, vPos, gaming);
                     break;
-
+                    
                     case 3:
-                    resultPergunta(teste, resposta, vPos);
+                    gaming = resultPergunta(teste, resposta, vPos, gaming);
                     break;
 
                     case 4:
-                    resultPergunta(teste, resposta, vPos);
+                    gaming = resultPergunta(teste, resposta, vPos, gaming);
                     break;
 
                     case 5:
-                    resultPergunta(teste, resposta, vPos);
+                    gaming = resultPergunta(teste, resposta, vPos, gaming);
                     break;
 
                     case 6:
-                    resultPergunta(teste, resposta, vPos);
+                    gaming = resultPergunta(teste, resposta, vPos, gaming);
                     break;
 
                     case 7:
-                    resultPergunta(teste, resposta, vPos);
+                    gaming = resultPergunta(teste, resposta, vPos, gaming);
                     break;
 
                     case 8:
-                    resultPergunta(teste, resposta, vPos);
+                    gaming = resultPergunta(teste, resposta, vPos, gaming);
                     break;
 
                     case 9:
-                    resultPergunta(teste, resposta, vPos);
+                    gaming = resultPergunta(teste, resposta, vPos, gaming);
                     break;
 
-                    default: System.out.println("Não tem esse case ainda ou seila"); break;
+                    case 10:
+                    gaming = resultPergunta(teste, resposta, vPos, gaming);
+                    break;
             }
 
         }
     }
-
-    }
-
+        }
 
     public static void totalPremio(int qttAcertos){
 
     }
 
-    public static void resultPergunta(int nPergunta, String resposta, int posPergunta){ //junta os metodos de mostrar pergunta e verificar se tá certo ou errado
+    public static boolean resultPergunta(int nPergunta, String resposta, int posPergunta, boolean control){ //junta os metodos de mostrar pergunta e verificar se tá certo ou errado
         showPergunta(nPergunta);                                                       // apenas um metodo para parametrizar os cases em 1 linha só
         System.out.print("\nSua resposta: ");
         resposta = sc.nextLine();
-        verify(resposta, posPergunta);
+        return verify(resposta, posPergunta);
     }
 
     public static void showPergunta(int p){
         System.out.println(perguntas[p][0] + "\n");
-        for(String a : alternativas[p]){
+        for(String a : alternativas[p-1]){
             System.out.println(a);
         }
     }
 
-    public static void verify(String r, int pos){
+    public static boolean verify(String r, int pos){
         if(r.equalsIgnoreCase(perguntas[pos][1])){
             System.out.println("\nBOA");
+            return true;
         }else{
         System.out.println("\ngame over");
+        return false;
         }
     }
     
@@ -134,6 +134,7 @@ public class JogoDoMilhao {
 
 
     public static String perguntas [][] = { //pergunta + alternativa correta
+        {"Essa posição zero não vai rodar nas perguntas por questões da lógica usada na randomização de perguntas", "FABIOSEIXASSALES"},
         {"PRIMEIRA PERGUNTA VALENDO 500 REAIS!" +"\nQual desse itens não foram excluídos do league of legends?","A"},   
         {"Em que local a Lady Maria de \"Bloodborne: The Old Hunters\" é encontrada?" , "C"},
         {"Qual o país foi mais afetado pela dissolução da Iugoslávia?", "A"},
