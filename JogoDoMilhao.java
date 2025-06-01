@@ -55,43 +55,43 @@ public class JogoDoMilhao {
                 switch (teste) {
 
                     case 1:
-                    gaming = resultPergunta(teste, resposta, vPos, gaming);
+                    gaming = resultPergunta(teste, resposta, vPos);
                     break;
                     
                     case 2:
-                    gaming = resultPergunta(teste, resposta, vPos, gaming);
+                    gaming = resultPergunta(teste, resposta, vPos);
                     break;
                     
                     case 3:
-                    gaming = resultPergunta(teste, resposta, vPos, gaming);
+                    gaming = resultPergunta(teste, resposta, vPos);
                     break;
 
                     case 4:
-                    gaming = resultPergunta(teste, resposta, vPos, gaming);
+                    gaming = resultPergunta(teste, resposta, vPos);
                     break;
 
                     case 5:
-                    gaming = resultPergunta(teste, resposta, vPos, gaming);
+                    gaming = resultPergunta(teste, resposta, vPos);
                     break;
 
                     case 6:
-                    gaming = resultPergunta(teste, resposta, vPos, gaming);
+                    gaming = resultPergunta(teste, resposta, vPos);
                     break;
 
                     case 7:
-                    gaming = resultPergunta(teste, resposta, vPos, gaming);
+                    gaming = resultPergunta(teste, resposta, vPos);
                     break;
 
                     case 8:
-                    gaming = resultPergunta(teste, resposta, vPos, gaming);
+                    gaming = resultPergunta(teste, resposta, vPos);
                     break;
 
                     case 9:
-                    gaming = resultPergunta(teste, resposta, vPos, gaming);
+                    gaming = resultPergunta(teste, resposta, vPos);
                     break;
 
                     case 10:
-                    gaming = resultPergunta(teste, resposta, vPos, gaming);
+                    gaming = resultPergunta(teste, resposta, vPos);
                     break;
             }
 
@@ -103,7 +103,7 @@ public class JogoDoMilhao {
 
     }
 
-    public static boolean resultPergunta(int nPergunta, String resposta, int posPergunta, boolean control){ //junta os metodos de mostrar pergunta e verificar se tá certo ou errado
+    public static boolean resultPergunta(int nPergunta, String resposta, int posPergunta){ //junta os metodos de mostrar pergunta e verificar se tá certo ou errado
         showPergunta(nPergunta);                                                       // apenas um metodo para parametrizar os cases em 1 linha só
         System.out.print("\nSua resposta: ");
         resposta = sc.nextLine();
@@ -117,8 +117,8 @@ public class JogoDoMilhao {
         }
     }
 
-    public static boolean verify(String r, int pos){
-        if(r.equalsIgnoreCase(perguntas[pos][1])){
+    public static boolean verify(String resposta, int posicaoDaPergunta){
+        if(resposta.equalsIgnoreCase(perguntas[posicaoDaPergunta][1])){
             System.out.println("\nBOA");
             return true;
         }else{
