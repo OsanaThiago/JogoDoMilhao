@@ -6,13 +6,10 @@ public class JogoDoMilhao {
     static Scanner sc2 = new Scanner(System.in);
     static Random rd = new Random();
     public static void main(String[] args) {
-
     start();
-
     }
 
     //Declaração de métodos/Variaveis 
-
     public static void start(){
         System.out.println("\nSEJA MUITO BEM VINDO AO JOGO DO MILHÃO!!");   
         System.out.println("PREPARADO VOLTAR PARA CASA MILIONÁRIO?\n\n1 = Iniciar \n2 = Sair\n");
@@ -34,6 +31,7 @@ public class JogoDoMilhao {
         int teste;
         int posicao = -1;
         boolean gaming = true;
+        int qttAcertos = 0;
 
             while(numero[9] == 0 && gaming){
 
@@ -55,40 +53,56 @@ public class JogoDoMilhao {
                 switch (teste) {
 
                     case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10: 
-                    gaming = resultPergunta(teste, resposta, vPos);
-                    break;
-                    
-            }
+                    gaming = resultPergunta(teste, resposta, vPos, qttAcertos); 
 
+                    if(gaming){
+                        qttAcertos++;
+                    }
+                    if(qttAcertos == 10){ 
+                    // por algum motivo provavelmetne devido a primeira condiçao do while deixar de ser true, quando vc acerta tudo
+                    // não mostra a premião max. tentei colocar esse if dentro da função e n funciona, se deixar ele fora do while funciona tbm
+                    //mas optei por deixar assim
+                    System.out.println("PARABÉNS, CAMPEÃ (O)!!");
+                    System.out.println("VOCÊ TERMINOU COM UM PRÊMIO DE R$ 1.000.000!");
+        }
+                    break; 
+
+            }
         }
     }
-        }
+}
+
+    public static String premio [] = {"R$ 0","R$ 500" , "R$ 1.000","R$ 5.000","R$ 10.000","R$ 50.000","R$ 100.000","R$ 250.000","R$ 500.000","R$ 750.000","R$ 1.000.000"};
 
     public static void totalPremio(int qttAcertos){
-
+        System.out.println("VOCÊ TERMINOU COM UM PRÊMIO DE " + premio[qttAcertos]+"!");
     }
 
-    public static boolean resultPergunta(int nPergunta, String resposta, int posPergunta){ //junta os metodos de mostrar pergunta e verificar se tá certo ou errado
+    public static boolean resultPergunta(int nPergunta, String resposta, int posPergunta, int acertos){ //junta os metodos de mostrar pergunta e verificar se tá certo ou errado
+        System.out.print("PERGUNTA " + (acertos+1) +": ");
         showPergunta(nPergunta);                                                       // apenas um metodo para parametrizar os cases em 1 linha só
-        System.out.print("\nSua resposta: ");
+        System.out.print("\nSUA RESPOSTA: ");
         resposta = sc.nextLine();
-        return verify(resposta, posPergunta);
+        return verify(resposta, posPergunta, acertos);
     }
 
     public static void showPergunta(int p){
-        System.out.println(perguntas[p][0] + "\n");
+        System.out.println(perguntas[p][0].toUpperCase() + "\n");
+
         for(String a : alternativas[p-1]){
-            System.out.println(a);
+            System.out.println(a.toUpperCase());
         }
     }
 
-    public static boolean verify(String resposta, int posicaoDaPergunta){
+    public static boolean verify(String resposta, int posicaoDaPergunta, int qttAcertos){
         if(resposta.equalsIgnoreCase(perguntas[posicaoDaPergunta][1])){
-            System.out.println("\nBOA");
+            System.out.println("\nBOA\n");
             return true;
         }else{
-        System.out.println("\ngame over");
-        return false;
+            System.out.println("");
+            totalPremio(qttAcertos);
+            System.out.println("GAME OVER");
+            return false;
         }
     }
     
@@ -97,36 +111,31 @@ public class JogoDoMilhao {
         System.out.flush();
     }
 
-
     public static String perguntas [][] = { //pergunta + alternativa correta
         {"Essa posição zero não vai rodar nas perguntas por questões da lógica usada na randomização de perguntas", "FABIOSEIXASSALES"},
-        {"PRIMEIRA PERGUNTA VALENDO 500 REAIS!" +"\nQual desse itens não foram excluídos do league of legends?","A"},   
+        {"Qual desse itens não foram excluídos do league of legends?","A"},   
         {"Em que local a Lady Maria de \"Bloodborne: The Old Hunters\" é encontrada?" , "C"},
         {"Qual o país foi mais afetado pela dissolução da Iugoslávia?", "A"},
         {"Qual o mais novo pacote do valorant?", "B"},
         {"Quantos processos Fabio Seixas Sales possui envolvimento?", "B"},
         {"Qual o nome da empresa de assistência técnica de Fábio Sales?", "C"},
-        {"SÉTIMA PERGUNTA VALENDO XXX ", "B"},
-        {"OITAVA PERGUNTA VALENDO XXX ", "B"},
-        {"NONA PERGUNTA VALENDO XXX ", "B"},
-        {"ÚLTIMA PERGUNTA VALENDO XXX ", "B"},
+        {"perg", "B"},
+        {"unta", "B"},
+        {"osana", "B"},
+        {"thiago", "B"},
     };
 
     
-    public static String alternativas [][] = { //perguntas
-        {"A = Criptoflora" , "B = Pistola Laminar Hextec", "C = Hemodrenário", "D = Garra do Espreitador"},
-        {"A = Caelid ", "B = Universidade Católica do Salvador", "C = Torre do relógio astral", "D = Noxus"},
-        {"A = Bósnia e Herzegovina", "B = Eslovênia", "C = Croácia", "D = Sérvia"},
-        {"A = Cyrax", "B = Beta Remasted", "C = Divergencia", "D = Arcane"},
-        {"A = 4", "B = 6", "C = 7", "D = 1"},
-        {"A = FABIO TECH", "B = COMPUTER ASSISTENCE", "C = GAF ASSESSORIA", "D = FSS"},
-        {"A = teste", "B = tesete", "C = testb", "D = teeee"},
-        {"A = teste", "B = tesete", "C = testb", "D = teeee"},
-        {"A = teste", "B = tesete", "C = testb", "D = teeee"},
-        {"A = teste", "B = tesete", "C = testb", "D = teeee"},
+    public static String alternativas [][] = { //perguntas 10x4
+        {"A) Criptoflora" , "B) Pistola Laminar Hextec", "C) Hemodrenário", "D) Garra do Espreitador"},
+        {"A) Caelid ", "B) Universidade Católica do Salvador", "C) Torre do relógio astral", "D) Noxus"},
+        {"A) Bósnia e Herzegovina", "B) Eslovênia", "C) Croácia", "D) Sérvia"},
+        {"A) Cyrax", "B) Beta Remasted", "C) Divergencia", "D) Arcane"},
+        {"A) 4", "B) 6", "C) 7", "D) 1"},
+        {"A) FABIO TECH", "B) COMPUTER ASSISTENCE", "C) GAF ASSESSORIA", "D) FSS"},
+        {"A) teste", "B) tesete", "C) testb", "D) teeee"},
+        {"A) teste", "B) tesete", "C) testb", "D) teeee"},
+        {"A) teste", "B) tesete", "C) testb", "D) teeee"},
+        {"A) teste", "B) tesete", "C) testb", "D) teeee"},
     };
-
-    public static String premio [] = {"R$ 500" , "R$ 1.000","R$ 5.000","R$ 10.000","R$ 50.000","R$ 100.000","R$ 250.000","R$ 500.000","R$ 750.000","R$ 1.000.000"};
-    //valor do premio conforme quantidade de acertos
-
 }
