@@ -70,8 +70,6 @@ public class JogoDoMilhao {
             }
         }
     }
-
-
 }
 
     public static String premio [] = {"R$ 0","R$ 500" , "R$ 1.000","R$ 5.000","R$ 10.000","R$ 50.000","R$ 100.000","R$ 250.000","R$ 500.000","R$ 750.000","R$ 1.000.000"};
@@ -86,13 +84,11 @@ public class JogoDoMilhao {
         System.out.print("\nSUA RESPOSTA: ");
         resposta = sc.nextLine().toUpperCase(); // Converte para maiúsculas
         
-        
         while (!resposta.equals("A") && !resposta.equals("B") && !resposta.equals("C") && !resposta.equals("D")) {
              System.out.println("Opção inválida! Digite apenas A, B, C ou D.");
              System.out.print("\nSUA RESPOSTA: ");
              resposta = sc.nextLine().toUpperCase();
            }
-
 
         return verify(resposta, posPergunta, acertos);
     }
@@ -136,7 +132,6 @@ public class JogoDoMilhao {
         {"Qual o jogo de videogame mais vendido do mundo ate hoje", "B"},
     };
 
-    
     public static String alternativas [][] = { 
         {"A) Criptoflora" , "B) Pistola Laminar Hextec", "C) Hemodrenário", "D) Garra do Espreitador"},
         {"A) Brotas", "B) São Caetano", "C) Itapuã", "D) Pituba"},
@@ -149,6 +144,4 @@ public class JogoDoMilhao {
         {"A) Vitória", "B) Bahia", "C) Sport", "D) Fortaleza"},
         {"A) Mario Kart 8", "B) Minecraft", "C) Grand Theft Auto V", "D) Pac-Man"},
     };
-
-
 }
