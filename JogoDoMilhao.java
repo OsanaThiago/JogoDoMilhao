@@ -9,14 +9,13 @@ public class JogoDoMilhao {
     start();
     }
 
-    //Declaração de métodos
     public static void start(){
         System.out.println("\nSEJA MUITO BEM VINDO AO JOGO DO MILHÃO!!");   
         System.out.println("PREPARADO VOLTAR PARA CASA MILIONÁRIO?\n\n1 = Iniciar \n2 = Sair\n");
         System.out.print("Resposta: ");
         int play = sc2.nextInt();
-        
-        if(play == 1){
+
+        if(play == 1){  // Se escolher iniciar, aqui começa o jogo
             limparConsole();
             getPergunta();
         }
@@ -83,7 +82,7 @@ public class JogoDoMilhao {
     }
     while(teste.equalsIgnoreCase(perguntas[nPergunta][1])); //professor pode perguntar o porquê do dowhile
     return teste;
-}
+    }
 
     public static void totalPremio(int qttAcertos){
         System.out.println("VOCÊ TERMINOU COM UM PRÊMIO DE " + premio[qttAcertos]+"!");
@@ -94,7 +93,14 @@ public class JogoDoMilhao {
         showPergunta(nPergunta);
         System.out.println("\nX = USAR DICA");                                                       
         System.out.print("\nSUA RESPOSTA: ");
-        resposta = sc.nextLine();
+        resposta = sc.nextLine().toUpperCase(); // Converte para maiúsculas
+        
+        while (!resposta.equals("A") && !resposta.equals("B") && !resposta.equals("C") && !resposta.equals("D")) {
+             System.out.println("Opção inválida! Digite apenas A, B, C ou D.");
+             System.out.print("\nSUA RESPOSTA: ");
+             resposta = sc.nextLine().toUpperCase();
+           }
+
         return verify(resposta, posPergunta, acertos);
     }
 
@@ -116,7 +122,6 @@ public class JogoDoMilhao {
             System.out.print("\nEscolha: ");
             resposta = sc.nextLine();
             
-
             switch (resposta) {
 
                 case "3": 
@@ -140,7 +145,6 @@ public class JogoDoMilhao {
 
                 case "4": return false;
 
-                
                 default: return false;
             }
         }
@@ -153,39 +157,39 @@ public class JogoDoMilhao {
     }
     
     public static void limparConsole() {
-        System.out.print("\033[H\033[2J"); //"oq significa os dois comandos?" não lembro, tenho de pesquisar novamente, hahaha
+        System.out.print("\033[H\033[2J"); //"oq significa os dois comandos?" não lembro, tenho de pesquisar novamente, hahaha//1
         System.out.flush();
     }
 
     //Declaração de variaveis
     static boolean dicaAmigo = true;
 
-    public static String perguntas [][] = { //pergunta + alternativa correta
-        {"Essa posição zero não vai rodar nas perguntas por questões da lógica usada na randomização de perguntas", "FABIOSEIXASSALES"}, //pq o vetor por padrão vem com valor 0 ai a pergunta(numero) 0 caia sempre como já utlizado
-        {"Qual item não foi excluído do league of legends?","A"},   
-        {"Em que local a Lady Maria de \"Bloodborne: The Old Hunters\" é encontrada?" , "C"},
-        {"Qual o país foi mais afetado pela dissolução da Iugoslávia?", "A"},
-        {"Qual o mais novo pacote do valorant?", "B"},
-        {"Quantos processos Fabio Seixas Sales possui envolvimento?", "B"},
-        {"Qual o nome da empresa de assistência técnica de Fábio Sales?", "C"},
-        {"Qual campeão não escala com AD e AP?", "D"},
-        {"unta", "B"},
-        {"osana", "B"},
-        {"thiago", "B"},
-    };
-
-    public static String alternativas [][] = { //perguntas 10x4
-        {"A) Sedenta por Sangue" , "B) Pistola Laminar Hextec", "C) Hemodrenário", "D) Poção Corrupta"},
-        {"A) Caelid ", "B) Universidade Católica do Salvador", "C) Torre do relógio astral", "D) Noxus"},
-        {"A) Bósnia e Herzegovina", "B) Eslovênia", "C) Croácia", "D) Sérvia"},
-        {"A) Cyrax", "B) Beta Remasted", "C) Divergencia", "D) Arcane"},
-        {"A) 4", "B) 6", "C) 7", "D) 1"},
-        {"A) FABIO TECH", "B) COMPUTER ASSISTENCE", "C) GAF ASSESSORIA", "D) FSS"},
-        {"A) Akali", "B) Katarina", "C) Qiyana", "D) Leblanc"},
-        {"A) teste", "B) tesete", "C) testb", "D) teeee"},
-        {"A) teste", "B) tesete", "C) testb", "D) teeee"},
-        {"A) teste", "B) tesete", "C) testb", "D) teeee"},
-    };
-
     public static String premio [] = {"R$ 0","R$ 500" , "R$ 1.000","R$ 5.000","R$ 10.000","R$ 50.000","R$ 100.000","R$ 250.000","R$ 500.000","R$ 750.000","R$ 1.000.000"};
+  
+    public static String perguntas [][] = { 
+        {"Essa posição zero não vai rodar nas perguntas por questões da lógica usada na randomização de perguntas", "FABIOSEIXASSALES"},
+        {"Qual desse itens não foram excluídos do league of legends?","A"},   
+        {"Qual o bairro mais populoso de Salvador, sengundo o Censo IBGE 2022?" , "C"},
+        {"Qual o elemento considerado mais importante em um computador", "D"},
+        {"Qual o mais novo pacote do Jogo Valorant?", "C"},
+        {"Qual a nota da UCSAL no mec?", "D"},
+        {"Qual o nome da maior empresa de tecnologia do mundo?", "C"},
+        {"A linguagem JAVA é de qual década?", "D"},
+        {"Qual o Estado mais tecnológico do Brasil", "B"},
+        {"Qual time de Futebol do Nordeste possui a maior torcida?", "C"},
+        {"Qual o jogo de videogame mais vendido do mundo ate hoje", "B"},
+    };
+    
+    public static String alternativas [][] = { 
+        {"A) Criptoflora" , "B) Pistola Laminar Hextec", "C) Hemodrenário", "D) Garra do Espreitador"},
+        {"A) Brotas", "B) São Caetano", "C) Itapuã", "D) Pituba"},
+        {"A) Mouse", "B) Tela", "C) Teclado", "D) CPU"},
+        {"A) Cyrax", "B) Beta Remasted", "C) Divergencia", "D) Arcane"},
+        {"A) 10", "B) 3", "C) 6", "D) 5"},
+        {"A) IBM", "B) COMPUTER ASSISTENCE", "C) APPLE", "D) CISCO"},
+        {"A) 60", "B) 70", "C) 80", "D) 90"},
+        {"A) Santa Catarina", "B) São Paulo", "C) Bahia", "D) Rio de Janeiro"},
+        {"A) Vitória", "B) Bahia", "C) Sport", "D) Fortaleza"},
+        {"A) Mario Kart 8", "B) Minecraft", "C) Grand Theft Auto V", "D) Pac-Man"},
+    };
 }
