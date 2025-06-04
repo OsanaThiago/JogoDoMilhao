@@ -5,6 +5,8 @@ public class JogoDoMilhao {
     static Scanner sc = new Scanner(System.in);
     static Scanner sc2 = new Scanner(System.in);
     static Random rd = new Random();
+    static boolean pulouPergunta = false; // Controla se o jogador já pulou
+
     public static void main(String[] args) {
     start();
     }
@@ -81,20 +83,46 @@ public class JogoDoMilhao {
     }
 
     public static boolean resultPergunta(int nPergunta, String resposta, int posPergunta, int acertos){ //junta os metodos de mostrar pergunta e verificar se tá certo ou errado
-        System.out.print("PERGUNTA " + (acertos+1) +": ");
-        showPergunta(nPergunta);                                                       // apenas um metodo para parametrizar os cases em 1 linha só
+    
+    System.out.print("PERGUNTA " + (acertos + 1) + ": ");
+    showPergunta(nPergunta);
+    System.out.print("\nDigite sua resposta (A, B, C, D) ou 'P' para pular: ");
+    
+    resposta = sc.nextLine().toUpperCase();
+
+    // Enquanto a resposta não for válida, peça novamente
+    while (!resposta.equals("A") && !resposta.equals("B") && !resposta.equals("C") && 
+           !resposta.equals("D") && !resposta.equals("P")) {
+        System.out.println("Opção inválida! Digite apenas A, B, C, D ou 'P' para pular.");
         System.out.print("\nSUA RESPOSTA: ");
-        resposta = sc.nextLine().toUpperCase(); // Converte para maiúsculas
-        
-        
-        while (!resposta.equals("A") && !resposta.equals("B") && !resposta.equals("C") && !resposta.equals("D")) {
-             System.out.println("Opção inválida! Digite apenas A, B, C ou D.");
-             System.out.print("\nSUA RESPOSTA: ");
-             resposta = sc.nextLine().toUpperCase();
-           }
+        resposta = sc.nextLine().toUpperCase();
+    }
+
+    /*// Se o jogador quiser pular a pergunta
+    if (resposta.equals("P")) {
+        System.out.println("\nPergunta pulada! Vamos para a próxima...\n");
+        getPergunta(); // Chama novamente o método de perguntas
+        return false;  // Retorna falso para indicar que a pergunta foi pulada
+    }
+    */
+
+     // Se o jogador quiser pular a pergunta
+        if (resposta.equals("P")) {
+            if (pulouPergunta) {
+                System.out.println("\nVocê já usou sua opção de pular! Escolha uma alternativa (A, B, C ou D).");
+                return resultPergunta(nPergunta, resposta, posPergunta, acertos); // Pede uma resposta válida
+            } else {
+                pulouPergunta = true; // Marca que o jogador pulou uma vez
+                System.out.println("\nPergunta pulada! Vamos para a próxima...\n");
+                getPergunta(); // Chama nova pergunta
+                return false;
+            }
+        }
 
 
-        return verify(resposta, posPergunta, acertos);
+    // Se o jogador responder normalmente
+    return verify(resposta, posPergunta, acertos);
+
     }
 
     public static void showPergunta(int p){
