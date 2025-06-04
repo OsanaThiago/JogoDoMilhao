@@ -87,7 +87,7 @@ public class JogoDoMilhao {
     String letraletra ="";
 
     do{
-        char letra = (char) (rd.nextInt(3) + 'a');
+        char letra = (char) (rd.nextInt(4) + 'a');
         letraletra = String.valueOf(letra); 
         teste = letraletra;
     } while(teste.equalsIgnoreCase(perguntas[nPergunta][1])); 
@@ -169,7 +169,6 @@ public class JogoDoMilhao {
                 case "3": 
 
                 if(dicaAmigo){
-                    int valor = Integer.parseInt(randomConsultarAmigo(posicaoDaPergunta).toUpperCase());
                     System.out.println("\nRenato: Eu acho que a resposta é " + randomConsultarAmigo(posicaoDaPergunta).toUpperCase() + " ou " + (perguntas[posicaoDaPergunta][1]));
                     System.out.print("Sua escolha: ");
                     resposta = sc.nextLine();
