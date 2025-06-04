@@ -19,6 +19,8 @@ public class JogoDoMilhao {
     static Scanner sc = new Scanner(System.in);
     static Scanner sc2 = new Scanner(System.in);
     static Random rd = new Random();
+    static boolean pulouPergunta = false; // Controla se o jogador já pulou
+
     public static void main(String[] args) {
     start();
     }
@@ -140,6 +142,19 @@ public class JogoDoMilhao {
             resposta = sc.nextLine();
             
             switch (resposta) {
+                
+                case "1":
+                  if (resposta.equals("P")) {
+                    if (pulouPergunta) {
+                      System.out.println("\nVocê já usou sua opção de pular! Escolha uma alternativa (A, B, C ou D).");
+                      return resultPergunta(nPergunta, resposta, posPergunta, acertos); // Pede uma resposta válida
+                    } else {
+                      pulouPergunta = true; // Marca que o jogador pulou uma vez
+                      System.out.println("\nPergunta pulada! Vamos para a próxima...\n");
+                      getPergunta(); // Chama nova pergunta
+                      return false;
+                    }
+                  }
 
                 case "2":
                 if(dicaEliminar){
@@ -208,6 +223,7 @@ public class JogoDoMilhao {
 
     static boolean dicaAmigo = true;
     static boolean dicaEliminar = true;
+    static boolean dicaPular = true;
     public static String premio [] = {"R$ 0","R$ 500" , "R$ 1.000","R$ 5.000","R$ 10.000","R$ 50.000","R$ 100.000","R$ 250.000","R$ 500.000","R$ 750.000","R$ 1.000.000"};
   
     public static String perguntas [][] = { 
