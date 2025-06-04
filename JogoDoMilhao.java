@@ -1,6 +1,20 @@
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+* Trabalho LPA
+UCSAL 2025.1
+* Prof. Fabio Sales
+* Tema: <Tema do Trabalho>
+*
+* Alunos:
+* Lucas Moura Ribeiro
+* Osaná Thiago Santos de Freitas
+* Phillipe Gabriel Alves Sanson
+* Renato de Britto Trindade Rodrigues
+* Yuane de Oliveira Miranda
+*/
+
 public class JogoDoMilhao {
     static Scanner sc = new Scanner(System.in);
     static Scanner sc2 = new Scanner(System.in);
@@ -9,14 +23,13 @@ public class JogoDoMilhao {
     start();
     }
 
-    //Declaração de métodos/Variaveis/ MÉTODO QUE IRÁ DÁ A OPÇÃO DE INICIAR OU SAIR DO JOGO
     public static void start(){
         System.out.println("\nSEJA MUITO BEM VINDO AO JOGO DO MILHÃO!!");   
         System.out.println("PREPARADO VOLTAR PARA CASA MILIONÁRIO?\n\n1 = Iniciar \n2 = Sair\n");
         System.out.print("Resposta: ");
         int play = sc2.nextInt();
 
-        if(play == 1){  // Se escolher iniciar, aqui começa o jogo
+        if(play == 1){  
             limparConsole();
             getPergunta();
         }
@@ -59,38 +72,53 @@ public class JogoDoMilhao {
                         qttAcertos++;
                     }
                     if(qttAcertos == 10){ 
-                    // por algum motivo provavelmetne devido a primeira condiçao do while deixar de ser true, quando vc acerta tudo
-                    // não mostra a premião max. tentei colocar esse if dentro da função e n funciona, se deixar ele fora do while funciona tbm
-                    //mas optei por deixar assim
-                    System.out.println("PARABÉNS, CAMPEÃ (O)!!");
-                    System.out.println("VOCÊ TERMINOU COM UM PRÊMIO DE R$ 1.000.000!");
-        }
+                        System.out.println("PARABÉNS, CAMPEÃ (O)!!");
+                        System.out.println("VOCÊ TERMINOU COM UM PRÊMIO DE R$ 1.000.000!");
+                    }
                     break; 
-
+                }
             }
         }
     }
-}
 
-    public static String premio [] = {"R$ 0","R$ 500" , "R$ 1.000","R$ 5.000","R$ 10.000","R$ 50.000","R$ 100.000","R$ 250.000","R$ 500.000","R$ 750.000","R$ 1.000.000"};
+    public static String randomConsultarAmigo(int nPergunta){
+
+    String teste = "";
+    String letraletra ="";
+
+    do{
+        char letra = (char) (rd.nextInt(3) + 'a');
+        letraletra = String.valueOf(letra); 
+        teste = letraletra;
+    } while(teste.equalsIgnoreCase(perguntas[nPergunta][1])); 
+    
+    return teste;   
+    }
 
     public static void totalPremio(int qttAcertos){
         System.out.println("VOCÊ TERMINOU COM UM PRÊMIO DE " + premio[qttAcertos]+"!");
     }
 
-    public static boolean resultPergunta(int nPergunta, String resposta, int posPergunta, int acertos){ //junta os metodos de mostrar pergunta e verificar se tá certo ou errado
-        System.out.print("PERGUNTA " + (acertos+1) +": ");
-        showPergunta(nPergunta);                                                       // apenas um metodo para parametrizar os cases em 1 linha só
-        System.out.print("\nSUA RESPOSTA: ");
-        resposta = sc.nextLine().toUpperCase(); // Converte para maiúsculas
+    public static boolean resultPergunta(int nPergunta, String resposta, int posPergunta, int acertos){ 
+        while(true){
+            System.out.print("PERGUNTA " + (acertos+1) +": ");                                     
+            showPergunta(nPergunta);
+            System.out.println("\nX = USAR DICA");                                                       
+            System.out.print("\nSUA RESPOSTA: ");
+            resposta = sc.nextLine().toUpperCase(); 
         
-        while (!resposta.equals("A") && !resposta.equals("B") && !resposta.equals("C") && !resposta.equals("D")) {
-             System.out.println("Opção inválida! Digite apenas A, B, C ou D.");
-             System.out.print("\nSUA RESPOSTA: ");
-             resposta = sc.nextLine().toUpperCase();
-           }
+            while (!resposta.equals("A") && !resposta.equals("B") && !resposta.equals("C") && !resposta.equals("D") && !resposta.equals("X")) {
+                System.out.println("Opção inválida! Digite apenas A, B, C ou D.");
+                System.out.print("\nSUA RESPOSTA: ");
+                resposta = sc.nextLine().toUpperCase();
+            }
+           
+        Boolean resultado = verify(resposta, posPergunta, acertos);
 
-        return verify(resposta, posPergunta, acertos);
+        if(resultado != null){
+            return resultado;
+        }
+    }
     }
 
     public static void showPergunta(int p){
@@ -101,11 +129,47 @@ public class JogoDoMilhao {
         }
     }
 
-    public static boolean verify(String resposta, int posicaoDaPergunta, int qttAcertos){
-        if(resposta.equalsIgnoreCase(perguntas[posicaoDaPergunta][1])){
+    public static Boolean verify(String resposta, int posicaoDaPergunta, int qttAcertos){
+        if(resposta.equalsIgnoreCase(perguntas[posicaoDaPergunta][1])){ 
             System.out.println("\nBOA\n");
             return true;
-        }else{
+        }else if(resposta.equalsIgnoreCase("x")){
+            System.out.println("\nEscolha uma dica");
+            System.out.println("\n1 = Pular pergunta\n2 = Eliminar respostas\n3 = Consultar um amigo\n4 = Voltar");
+            System.out.print("\nEscolha: ");
+            resposta = sc.nextLine();
+            
+            switch (resposta) {
+
+                case "3": 
+                if(dicaAmigo){
+                    System.out.println("\nRenato: Eu acho que a resposta é " + randomConsultarAmigo(posicaoDaPergunta).toUpperCase() + " ou " + (perguntas[posicaoDaPergunta][1]));
+                    System.out.print("Sua escolha: ");
+                    resposta = sc.nextLine();
+                    dicaAmigo = false;
+
+                if(resposta.equalsIgnoreCase(perguntas[posicaoDaPergunta][1])){
+                    System.out.println("\nBOA\n");
+                    return true;
+                }
+                else{
+                    System.out.println("");
+                    totalPremio(qttAcertos);
+                    System.out.println("GAME OVER");
+                    return false;
+                } 
+                }
+                else{
+                    System.out.println("Você só pode usar uma vez cada dica por partida. ");
+                    return null;
+                }
+
+                case "4": return null;
+
+                default: return null;
+            }
+        }
+        else{
             System.out.println("");
             totalPremio(qttAcertos);
             System.out.println("GAME OVER");
@@ -114,17 +178,21 @@ public class JogoDoMilhao {
     }
     
     public static void limparConsole() {
-        System.out.print("\033[H\033[2J"); //"oq significa os dois comandos?" não lembro, tenho de pesquisar novamente, hahaha//1
+        System.out.print("\033[H\033[2J"); 
         System.out.flush();
     }
 
-    public static String perguntas [][] = { //pergunta + alternativa correta
+    static boolean dicaAmigo = true;
+
+    public static String premio [] = {"R$ 0","R$ 500" , "R$ 1.000","R$ 5.000","R$ 10.000","R$ 50.000","R$ 100.000","R$ 250.000","R$ 500.000","R$ 750.000","R$ 1.000.000"};
+  
+    public static String perguntas [][] = { 
         {"Essa posição zero não vai rodar nas perguntas por questões da lógica usada na randomização de perguntas", "FABIOSEIXASSALES"},
         {"Qual desse itens não foram excluídos do league of legends?","A"},   
         {"Qual o bairro mais populoso de Salvador, sengundo o Censo IBGE 2022?" , "C"},
         {"Qual o elemento considerado mais importante em um computador", "D"},
-        {"Qual o mais novo pacote do Jogo Valorant?", "C"},
-        {"Qual a nota da UCSAL no mec?", "D"},
+        {"Qual o mais novo pacote do Jogo Valorant?", "B"},
+        {"Qual passiva exclusiva da Fanny reduz o custo de energia ao acertar múltiplos cabos?", "A"},
         {"Qual o nome da maior empresa de tecnologia do mundo?", "C"},
         {"A linguagem JAVA é de qual década?", "D"},
         {"Qual o Estado mais tecnológico do Brasil", "B"},
@@ -137,7 +205,7 @@ public class JogoDoMilhao {
         {"A) Brotas", "B) São Caetano", "C) Itapuã", "D) Pituba"},
         {"A) Mouse", "B) Tela", "C) Teclado", "D) CPU"},
         {"A) Cyrax", "B) Beta Remasted", "C) Divergencia", "D) Arcane"},
-        {"A) 10", "B) 3", "C) 6", "D) 5"},
+        {"A) Steel Threads", "B) Tornado Edge", "C) Cut throat", "D) Cable Reset"},
         {"A) IBM", "B) COMPUTER ASSISTENCE", "C) APPLE", "D) CISCO"},
         {"A) 60", "B) 70", "C) 80", "D) 90"},
         {"A) Santa Catarina", "B) São Paulo", "C) Bahia", "D) Rio de Janeiro"},
