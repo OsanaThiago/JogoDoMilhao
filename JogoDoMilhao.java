@@ -150,16 +150,15 @@ public class JogoDoMilhao {
                     resposta = sc.nextLine();
                     dicaEliminar = false;
                     
-                    if(resposta.equalsIgnoreCase(perguntas[posicaoDaPergunta][1])){
-                    System.out.println("\nBOA\n");
-                    return true;
-                }
-                else{
-                    System.out.println("");
-                    totalPremio(qttAcertos);
-                    System.out.println("GAME OVER");
-                    return false;
-                } 
+                        if(resposta.equalsIgnoreCase(perguntas[posicaoDaPergunta][1])){
+                        System.out.println("\nBOA\n");
+                        return true;
+                    }else{
+                        System.out.println("");
+                        totalPremio(qttAcertos);
+                        System.out.println("GAME OVER");
+                        return false;
+                    } 
 
                 }else{
                     System.out.println("Você só pode usar uma vez cada dica por partida.\n");
@@ -174,16 +173,16 @@ public class JogoDoMilhao {
                     resposta = sc.nextLine();
                     dicaAmigo = false;
 
-                if(resposta.equalsIgnoreCase(perguntas[posicaoDaPergunta][1])){
-                    System.out.println("\nBOA\n");
-                    return true;
-                }
-                else{
-                    System.out.println("");
-                    totalPremio(qttAcertos);
-                    System.out.println("GAME OVER");
-                    return false;
-                } 
+                    if(resposta.equalsIgnoreCase(perguntas[posicaoDaPergunta][1])){
+                        System.out.println("\nBOA\n");
+                        return true;
+                    }
+                    else{
+                        System.out.println("");
+                        totalPremio(qttAcertos);
+                        System.out.println("GAME OVER");
+                        return false;
+                    } 
                 }
                 else{
                     System.out.println("Você só pode usar uma vez cada dica por partida.\n");
@@ -191,7 +190,6 @@ public class JogoDoMilhao {
                 } 
 
                 case "4": return null;
-
                 default: return null;
             }
         }
