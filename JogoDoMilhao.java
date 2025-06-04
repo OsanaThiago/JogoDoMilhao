@@ -141,8 +141,35 @@ public class JogoDoMilhao {
             
             switch (resposta) {
 
+                case "2":
+                if(dicaEliminar){
+                    System.out.println("");
+                    System.out.println(randomConsultarAmigo(posicaoDaPergunta).toUpperCase());
+                    System.out.println(perguntas[posicaoDaPergunta][1]);
+                    System.out.println("\nSua nova resposta: ");
+                    resposta = sc.nextLine();
+                    dicaEliminar = false;
+                    
+                    if(resposta.equalsIgnoreCase(perguntas[posicaoDaPergunta][1])){
+                    System.out.println("\nBOA\n");
+                    return true;
+                }
+                else{
+                    System.out.println("");
+                    totalPremio(qttAcertos);
+                    System.out.println("GAME OVER");
+                    return false;
+                } 
+
+                }else{
+                    System.out.println("Você só pode usar uma vez cada dica por partida.\n");
+                    return null;                    
+                } 
+
                 case "3": 
+
                 if(dicaAmigo){
+                    int valor = Integer.parseInt(randomConsultarAmigo(posicaoDaPergunta).toUpperCase());
                     System.out.println("\nRenato: Eu acho que a resposta é " + randomConsultarAmigo(posicaoDaPergunta).toUpperCase() + " ou " + (perguntas[posicaoDaPergunta][1]));
                     System.out.print("Sua escolha: ");
                     resposta = sc.nextLine();
@@ -160,9 +187,9 @@ public class JogoDoMilhao {
                 } 
                 }
                 else{
-                    System.out.println("Você só pode usar uma vez cada dica por partida. ");
+                    System.out.println("Você só pode usar uma vez cada dica por partida.\n");
                     return null;
-                }
+                } 
 
                 case "4": return null;
 
@@ -183,7 +210,7 @@ public class JogoDoMilhao {
     }
 
     static boolean dicaAmigo = true;
-
+    static boolean dicaEliminar = true;
     public static String premio [] = {"R$ 0","R$ 500" , "R$ 1.000","R$ 5.000","R$ 10.000","R$ 50.000","R$ 100.000","R$ 250.000","R$ 500.000","R$ 750.000","R$ 1.000.000"};
   
     public static String perguntas [][] = { 
